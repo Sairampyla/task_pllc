@@ -10,6 +10,7 @@ import {RestApiService} from '../../Shared/rest-api-service';
 export class UserListComponent implements OnInit {
 
   Employee: any = [];
+  userName =  localStorage.getItem("username")
 
   constructor(private restApi:RestApiService,public _servc:AuthService) { }
 

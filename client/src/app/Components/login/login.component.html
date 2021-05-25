@@ -2,6 +2,8 @@
 
 
 
+<div *ngIf="mainForm">
+
 <div class="py-5">
   <div class="row">
       <div class="col-md-6 mx-auto">
@@ -31,8 +33,10 @@
                         <button [disabled]="form.invalid" type="submit" class="btn btn-success float-right">Login</button>
                          <p class="float-left" >
                            <button class="btn btn-primary"(click)="onGoto()">Register</button>
+                           <a style="color: dodgerblue;text-decoration: underline;cursor: pointer;" href="javascript:void(0);"(click)="ResetPwd()">Forgotpassword?</a>&nbsp;&nbsp;
                          </p>
-
+                         
+                  
 
                         <!-- <button  class="btn btn-primary" style="background-color: #385998;border-color: #385998;" (click)="facebookLogin()"><i class="fa fa-facebook">Facebook login</i></button>
                        <button  class="btn btn-primary" style="background-color: #c63d2d;border-color: #c63d2d;" (click)="googleLogin()"><i class="fa fa-gmail">Gmail login</i></button>
@@ -53,3 +57,36 @@
 
   </div>
   </div>
+</div>
+
+<div *ngIf="pwdForm">
+
+<div class="py-5">
+    <div class="row">
+<div class="col-md-6 mx-auto">
+<div  class="card rounded-0">
+    <h5 class="card-header">ResetPassword</h5>
+    <div class="card-body">
+     <div [formGroup]="forgotPwdform">
+        <div class="login_form" style="font-weight: bold;">
+            <h6>Enter your email here</h6>
+            <input type="text" id="foremail" class="form-control rounded-0" formControlName="foremail" placeholder="Enter Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$"><br/>
+           
+               <button class="btn btn-primary" (click)="onSendEmail()">Send </button>
+               <button class="btn btn-danger" (click)="onCancel()" style="float: right;">cancel</button>
+               <div *ngIf="errormsg">
+                <p class="failmail">Email was not registered with us..!</p>
+            </div>
+            <div *ngIf="successmsg">
+                <p class="successmail">Email sent succesfully!</p>
+            </div>
+    
+   
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
+    </div>
+</div>
+</div>

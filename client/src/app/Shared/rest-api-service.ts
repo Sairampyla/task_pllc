@@ -40,4 +40,15 @@ export class RestApiService {
   deleteEmployee(id) {
     return this.http.delete<Employees>(this._url +'/employees/' + id);
   }
+
+  //forgot-pwd link
+ getEmaillink(data){
+  return this.http.put(this._url+'/employees/forgot-passwordlink',data,this.httpOptions)
+ }
+
+  //change-pasword
+  changePassword(data){
+ 
+    return this.http.put(this._url+'/employees/changePassword',data,this.httpOptions)
+  }
 }

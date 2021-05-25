@@ -32,4 +32,7 @@ export class UserCreateComponent implements OnInit {
           }
         })
   }
+  onGoto(){
+    this.router.navigate(['/login'])
+  }
 }
