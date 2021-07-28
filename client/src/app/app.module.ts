@@ -6,9 +6,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS} from  '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
-import { UserCreateComponent } from './Components/user-create/user-create.component';
+
 import { UserListComponent } from './Components/user-list/user-list.component';
 import { UserEditComponent } from './Components/user-edit/user-edit.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
+import {FacebookLoginProvider} from 'angularx-social-login';
 
 
 import { AuthService } from './Shared/auth.service';
@@ -21,7 +24,6 @@ import { ResetPasswordComponent } from './Components/reset-password/reset-passwo
   declarations: [
     AppComponent,
     LoginComponent,
-    UserCreateComponent,
     UserListComponent,
     UserEditComponent,
     ResetPasswordComponent
@@ -31,10 +33,36 @@ import { ResetPasswordComponent } from './Components/reset-password/reset-passwo
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    SocialLoginModule,
     NgbModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService,AuthenticationGuard,{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptor,multi:true}],
+  providers: [AuthService,AuthenticationGuard,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '122393296105-jdtkso3qgdfif8e0hllc7o6696lt7auq.apps.googleusercontent.com'
+              
+            ),
+            
+          },
+          {
+            id:FacebookLoginProvider.PROVIDER_ID,
+            provider:new FacebookLoginProvider(
+              '333829878201733'
+            )
+          }
+          
+        ]
+      } as SocialAuthServiceConfig,
+      
+    },
+    {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

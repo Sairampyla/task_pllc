@@ -20,6 +20,7 @@ private _logUrl:string = "http://localhost:8080/employees/login"
   loggedIn(){
     return !!localStorage.getItem('token')
   }
+  
   logoutUser(){
     localStorage.removeItem('token')
     this.route.navigate(['/login'])

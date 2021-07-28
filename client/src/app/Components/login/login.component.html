@@ -6,7 +6,8 @@
 
 <div class="py-5">
   <div class="row">
-      <div class="col-md-6 mx-auto">
+      <div class="col-md-5
+       mx-auto">
           <div class="card rounded-0">
               <div class="card-header">
                   <h3 class="mb-0">Login</h3>
@@ -25,14 +26,33 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" [(ngModel)]="loginUserData.password" required password name="password" #password="ngModel" class="form-control rounded-0" required maxlength="80" minlength="5">
+                            <div class="input-group">
+                            <input  [type]="isfieldTextType ? 'text' : 'password'" [(ngModel)]="loginUserData.password" required password name="password" #password="ngModel" class="form-control rounded-0" required maxlength="80" minlength="4">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                  <i 
+                                    class="fa"
+                                    [ngClass]="{
+                                      'fa-eye-slash': !isfieldTextType,
+                                      'fa-eye': isfieldTextType
+                                    }"
+                                    (click)="toggleFieldTextType()"
+                                  ></i>
+                                </span>
+                              </div>
                             <div class="alert alert-danger" *ngIf="password.errors?.required && password.touched">
                                 Password is required
                               </div>
+                              </div>
                         </div>
-                        <button [disabled]="form.invalid" type="submit" class="btn btn-success float-right">Login</button>
-                         <p class="float-left" >
-                           <button class="btn btn-primary"(click)="onGoto()">Register</button>
+                     
+                        <button [disabled]="form.invalid" type="submit" class="btn btn-success">Login</button>
+                
+                        </form>
+                         <p>
+                           <!-- <button class="btn btn-primary"(click)="onGoto()">Register</button> -->
+                           <button class="btn btn-google" (click)="onGmaillogin()">Google login</button>&nbsp;
+                           <button class="btn btn-facebook" (click)="onFblogin()">Facebook login</button>&nbsp;
                            <a style="color: dodgerblue;text-decoration: underline;cursor: pointer;" href="javascript:void(0);"(click)="ResetPwd()">Forgotpassword?</a>&nbsp;&nbsp;
                          </p>
                          
@@ -50,7 +70,7 @@
                               </div>
                           </div>
                       </div> -->
-                  </form>
+            
               </div>
           </div>
       </div>
@@ -76,7 +96,7 @@
                <button class="btn btn-danger" (click)="onCancel()" style="float: right;">cancel</button>
                <div *ngIf="errormsg">
                 <p class="failmail">Email was not registered with us..!</p>
-            </div>
+                </div>
             <div *ngIf="successmsg">
                 <p class="successmail">Email sent succesfully!</p>
             </div>
