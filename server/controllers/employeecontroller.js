@@ -459,8 +459,10 @@ router.post('/', upload.single('file'),(req,res) =>{
         
                   let payLoad = {subject:doc._id}
                   let token = jwt.sign(payLoad,'secretkey')
-                  res.json({
-                      token:token
+                  res.status(200).json({
+                      token:token,
+                      success:true,
+                      
                   })
                 
                   
@@ -523,7 +525,14 @@ router.put('/:id',(req,res)=>{
            updatejsonResult[findInd] = obj;
        let srcdata = JSON.stringify(updatejsonResult);
        fs.writeFileSync(jsonPath, srcdata);
-        res.send(doc);}
+        // res.send(doc);
+        res.status(200).json({
+          // token:token,
+          doc:doc,
+          success:true,
+          
+      })
+      }
       else {console.log(err)}
   });
 
@@ -573,7 +582,14 @@ router.put('/:id',(req,res)=>{
                       updatejsonResult[findInd] = obj;
                   let srcdata = JSON.stringify(updatejsonResult);
                   fs.writeFileSync(jsonPath, srcdata);
-                   res.send(doc);}
+                 //  res.send(doc);
+                 res.status(200).json({
+                  // token:token,
+                  doc:doc,
+                  success:true,
+                  
+              })
+                  }
                  else {console.log(err)}
              });
           
